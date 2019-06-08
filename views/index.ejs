@@ -8,9 +8,9 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c545.png">
 
-    <title>Youtube Sync</title>
+    <title>Watch With Me</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -20,62 +20,71 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="#">
+                <img src="http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c545.png" width="30" height="30"
+                    class="d-inline-block align-top" alt="">
+                Watch With Me
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#create">Create</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#join">Join</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                </ul>
             </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </div>
-    </nav>
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                <span>Toggle Sidebar</span>
+            </button>
 
-    <div class="container">
+        </nav>
+    </header>
+
+    <!--TODO: Sidebar Chat-->
+    <div class="wrapper">
+    </div>
+
+    <!--Main Content-->
+    <div class="container" id="main-content">
       <div class="" style="position: relative">
         <div style="top: 0; left: 0;position: absolute; z-index: 10; height: 100%; width: 100%; background-color: black; opacity: 0"></div>
+        <div id="video-title">
+          <p class="font-weight-bold font-italic">Twice: Fancy</p>
+        </div>
         <div id="player"></div>
       </div>
       <div class="d-flex">
-        <div class=""">
+        <div class="">
           <button type="button" onclick="playVideo()" class="btn btn-dark p-2"><image class="p-2" style="width: 45px; height: 45px;" src="../images/triangle-right.svg"></image></button>
           <button type="button" onclick="pauseVideo()" class="btn btn-dark p-2"><image class="p-2" style="width: 45px; height: 45px;" src="../images/primitive-square.svg"></image></button>
         </div>
         <div class="flex-grow-1 align-self-center">
           <div id="progressBar" class="p-2">
             <div id="pbarClick" class="progress" style="height: 4em">
-              <div id="pbarClick2" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+              <div id="pbarClick2" class="progress-bar  bg-danger" role="progressbar" style="width: 0%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
           </div>
         </div>
+        <div class="p-2 align-self-center">
+          <span class ="align-bottom font-weight" id="timestamp">0:00/0:00</span>
+        </div>
+  
         </div>
       </div>
 
+    <i id="img-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="Tooltip for image" data-animation="false" data-trigger="manual"/>
     </div><!-- /.container -->
 
 
@@ -85,16 +94,42 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://gdata.youtube.com/feeds/api/videos/videoid?v=2&alt=json-in-script&format=5&callback=getTitle"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
     <script>
-      document.getElementById('pbarClick').addEventListener('click', function (e) {
+      function seekVid(e){
         var x = e.pageX - this.offsetLeft, // or e.offsetX (less support, though)
-          y = e.pageY - this.offsetTop,  // or e.offsetY
-          clickedValue = x * this.max / this.offsetWidth;
-        var positionInfo = this.getBoundingClientRect();
+        y = e.pageY - this.offsetTop,  // or e.offsetY
+        positionInfo = this.getBoundingClientRect();
         console.log(x / positionInfo.width);
         document.getElementById("pbarClick2").style.width = 100* (x/positionInfo.width) + "%"
         seekVideo(x / positionInfo.width * player.getDuration());
-      });
+      }
+      pbar = document.getElementById('pbarClick');
+      pbar.addEventListener('click', seekVid);
+      //pbar.addEventListener('mouseover', seekVid);
+
+      String.prototype.toMMSS = function () {
+        var sec_num = parseInt(this, 10); // don't forget the second param
+        var minutes = Math.floor(sec_num / 60);
+        var seconds = sec_num - (minutes * 60);
+
+        if (minutes < 10) { minutes = "0" + minutes; }
+        if (seconds < 10) { seconds = "0" + seconds; }
+        return minutes + ':' + seconds;
+      }
+      $("#pbarClick").on('mousemove', function (e) {
+        $("#img-tooltip").css({ top: $("#pbarClick").offset().top, left: e.pageX });
+        var p = ((e.pageX - this.offsetLeft) / this.getBoundingClientRect().width * player.getDuration()).toString().toMMSS();
+        console.log(p);
+        $('[data-toggle="tooltip"]').tooltip('hide').attr('data-original-title', p).tooltip('show');
+        $('[data-toggle="tooltip"]').tooltip('show');
+      })
+
+      $("#pbarClick").on('mouseleave', function (e) {
+        $('[data-toggle="tooltip"]').tooltip('hide');
+      })
       
       setInterval(function () {
         var pBar = document.getElementById('pbarClick2');
@@ -103,7 +138,10 @@
         }
         var fraction = player.getCurrentTime() / player.getDuration() * 100;
         pBar.style.width = fraction + "%";
-        console.log("here")
+        var label = document.getElementById('timestamp');
+        var time = player.getCurrentTime().toString().toMMSS() + " / " + player.getDuration().toString().toMMSS();
+        label.innerHTML = time
+
       }, 200);
 
 
@@ -146,10 +184,6 @@
       //    the player should play for six seconds and then stop.
       var done = false;
       function onPlayerStateChange(event) {
-        if (event.data == YT.PlayerState.PLAYING && !done) {
-          setTimeout(stopVideo, 6000);
-          done = true;
-        }
       }
       function playVideo(){
         player.playVideo();
@@ -166,6 +200,19 @@
       function seekVideo(param){
         player.seekTo(param);
       }
+
+      $(document).ready(function () {
+
+          $("#sidebar").mCustomScrollbar({
+            theme: "minimal"
+          });
+
+          $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+          });
+
+        });
+      
     </script>
   </body>
 </html>
