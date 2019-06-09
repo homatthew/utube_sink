@@ -11,14 +11,24 @@
     <link rel="icon" href="http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c545.png">
 
     <title>Watch With Me</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      #chat { font: 13px Helvetica, Arial; display: block; width: 100%;}
+      #chat_form { display:block;background: #000; padding: 3px;width: 100%; }
+      #chat_form input { border: 0; padding: 10px; width: 80%; margin-right: .5%; }
+      #chat_form button { width: 19%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages {display:block;overflow:auto; height: 700px;list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; word-wrap: break-word;}
+      #messages li:nth-child(odd) {  }
+
+    </style>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Custom styles for this template -->
-    <link href="css/main.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
 
   </head>
-
   <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -57,35 +67,46 @@
     </div>
 
     <!--Main Content-->
-    <div class="container" id="main-content">
-      <div class="" style="position: relative">
-        <div style="top: 0; left: 0;position: absolute; z-index: 10; height: 100%; width: 100%; background-color: black; opacity: 0"></div>
-        <div id="video-title">
-          <p class="font-weight-bold font-italic">Twice: Fancy</p>
-        </div>
-        <div id="player"></div>
-      </div>
-      <div class="d-flex">
-        <div class="">
-          <button type="button" onclick="playVideo()" class="btn btn-dark p-2"><image class="p-2" style="width: 45px; height: 45px;" src="../images/triangle-right.svg"></image></button>
-          <button type="button" onclick="pauseVideo()" class="btn btn-dark p-2"><image class="p-2" style="width: 45px; height: 45px;" src="../images/primitive-square.svg"></image></button>
-        </div>
-        <div class="flex-grow-1 align-self-center">
-          <div id="progressBar" class="p-2">
-            <div id="pbarClick" class="progress" style="height: 4em">
-              <div id="pbarClick2" class="progress-bar  bg-danger" role="progressbar" style="width: 0%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+    <div>
+      <div style="width: 80%;display:inline-block;">
+        <div class="container" id="main-content">
+          <div class="" style="position: relative">
+            <div style="top: 0; left: 0;position: absolute; z-index: 10; height: 100%; width: 100%; background-color: black; opacity: 0"></div>
+            <div id="video-title">
+              <p class="font-weight-bold font-italic">Twice: Fancy</p>
+            </div>
+            <div id="player"></div>
+          </div>
+          <div class="d-flex">
+            <div class="">
+              <button type="button" onclick="emitPlay()" class="btn btn-dark p-2"><image class="p-2" style="width: 45px; height: 45px;" src="../images/triangle-right.svg"></image></button>
+              <button type="button" onclick="emitPause()" class="btn btn-dark p-2"><image class="p-2" style="width: 45px; height: 45px;" src="../images/primitive-square.svg"></image></button>
+            </div>
+            <div class="flex-grow-1 align-self-center">
+              <div id="progressBar" class="p-2">
+                <div id="pbarClick" class="progress" style="height: 4em">
+                  <div id="pbarClick2" class="progress-bar  bg-danger" role="progressbar" style="width: 0%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </div>
+            <div class="p-2 align-self-center">
+              <span class ="align-bottom font-weight" id="timestamp">0:00/0:00</span>
             </div>
           </div>
         </div>
-        <div class="p-2 align-self-center">
-          <span class ="align-bottom font-weight" id="timestamp">0:00/0:00</span>
-        </div>
-  
+      </div>
+      <div style="position: absolute;width:19%;background-color:white;display:inline-block;height:700px;top:60px">
+        <div id="chat">
+          <ul id="messages">
+          </ul>
+          <form id="chat_form" action="">
+            <input id="m" autocomplete="off" /><button>Send</button>
+          </form>
         </div>
       </div>
+    </div>
 
     <i id="img-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="Tooltip for image" data-animation="false" data-trigger="manual"/>
-    </div><!-- /.container -->
 
 
     <!-- Bootstrap core JavaScript
@@ -96,6 +117,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://gdata.youtube.com/feeds/api/videos/videoid?v=2&alt=json-in-script&format=5&callback=getTitle"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 
     <script>
       function seekVid(e){
@@ -104,7 +127,8 @@
         positionInfo = this.getBoundingClientRect();
         console.log(x / positionInfo.width);
         document.getElementById("pbarClick2").style.width = 100* (x/positionInfo.width) + "%"
-        seekVideo(x / positionInfo.width * player.getDuration());
+        //seekVideo(x / positionInfo.width * player.getDuration());
+        emitSeek(x / positionInfo.width * player.getDuration()); // calls seekVideo
       }
       pbar = document.getElementById('pbarClick');
       pbar.addEventListener('click', seekVid);
@@ -212,7 +236,52 @@
           });
 
         });
-      
+
+
+      var name = "anonymous";
+      var socket = io.connect('http://localhost:5000/', {query:"token=<%= token %>"});  
+      // sending
+      function emitPlay(){
+        playVideo();
+        socket.emit('play')
+      }
+      function emitPause(){
+        pauseVideo();
+        socket.emit('pause')
+      }
+      function emitSeek(param){
+        seekVideo(param);
+        socket.emit('seek', param)
+      }
+
+      // receiving
+      socket.on('play', function() {
+        playVideo();
+      });
+      socket.on('pause', function() {
+        pauseVideo();
+      });
+      socket.on('seek', function(param) {
+        seekVideo(param);
+      });
+
+      $('form').submit(function(e){
+        e.preventDefault(); // prevents page reloading
+        socket.emit('chat message', $('#m').val());
+        $('#m').val('');
+        return false;
+      });
+      //Upon receiving a "chat message", we will do the following
+      socket.on('chat message', function(msg){
+        console.log(msg);
+        var msg_p = JSON.parse(msg);
+        console.log(msg_p);
+        $('#messages').append($('<li><span style="color: '+msg_p["color"]+'">'+name+'</span>: '+msg_p["message"]+'</li>'));
+        $('#messages').scrollTop($('#messages')[0].scrollHeight - $('#messages')[0].clientHeight);
+      });
+
+
+
     </script>
   </body>
 </html>
