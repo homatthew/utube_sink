@@ -15,11 +15,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <link rel="icon" href="http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c545.png">
+
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" id="mainNav">
             <a class="navbar-brand" href="#">
                 <img src="http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c545.png" width="30" height="30"
                     class="d-inline-block align-top" alt="">
@@ -32,10 +34,10 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item ">
-                        <a class="nav-link" href="#create">Create</a>
+                        <a class="nav-link" href="#create" data-toggle="modal" data-target="#createModal">Create</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#join">Join</a>
+                        <a class="nav-link" href="#join" >Join</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#about">About</a>
@@ -46,111 +48,65 @@
     </header>
 
     <a name="page-top"></a>
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-            <li data-target="#myCarousel" data-slide-to="2" class=""></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="d-block w-100"
-                    src="https://media.gettyimages.com/photos/abstract-soft-red-background-picture-id939609996?b=1&k=6&m=939609996&s=612x612&w=0&h=TY0c8rmoyTDQhKj-pcptBJy4do5BBCMRjw45F0UhptY="
-                    alt="First slide" style="filter: brightness(90%)">
-                <div class="container">
-                    <div class="carousel-caption text-left">
-                        <h1>Create</h1>
-                        <p>create a room to watch with friends</p>
-                        <p><a class="btn btn-lg btn-dark" href="#create" role="button">Learn More</a></p>
+
+    
+    <div class="row" style="color: white; display: flex;">
+        <div class="col" style="float: left; width: 50%;background: rgb(126, 56, 56);padding-top: 200px;padding-bottom: 200px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 style="font-size: 3em;">Create A Room</h2>
+                        <ol style="font-size:20px;">
+                            <li>Find a youtube video</li>
+                            <li>Press Create</li>
+                            <li>Share the code with your friends</li>
+                            <li>Have fun watching videos!</li>
+                        </ol>
+                        <div style="padding-left: 20px">
+                            <button type="submit" class="btn btn-light" data-toggle="modal"
+                                data-target="#createModal">Create</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="carousel-item">
-                <img class="d-block w-100"
-                    src="https://media.gettyimages.com/photos/abstract-soft-red-background-picture-id939609996?b=1&k=6&m=939609996&s=612x612&w=0&h=TY0c8rmoyTDQhKj-pcptBJy4do5BBCMRjw45F0UhptY="
-                    alt="Second slide" style="filter: brightness(90%); ">
-                <div class="carousel-caption text-left">
-                    <h1>Join</h1>
-                    <p>Join A Room Through A code</p>
-                    <p><a class="btn btn-lg btn-dark" href="#join" role="button">Learn More</a></p>
+        </div>
+        <div class="col" style="float: left; width: 50%;background: rgb(70, 22, 28);padding-top: 200px;padding-bottom: 200px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 style="font-size: 3em;">Join A Room</h2>
+                        <p>Enter The Room Code Below</p>
+                    </div>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100"
-                    src="https://media.gettyimages.com/photos/abstract-soft-red-background-picture-id939609996?b=1&k=6&m=939609996&s=612x612&w=0&h=TY0c8rmoyTDQhKj-pcptBJy4do5BBCMRjw45F0UhptY="
-                    alt="Third slide" style="filter: brightness(90%)">
-                <div class="carousel-caption text-left">
-                    <h1>About</h1>
-                    <p>Learn About How This Site is Made </p>
-                    <p><a class="btn btn-lg btn-dark" href="#about" role="button">Learn More</a></p>
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="form-group w-50">
+                            <input type="code" style="width: 25rem;" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                placeholder="Enter Code">
+                        </div>
+                        <button type="submit" onclick="new_link()" class="btn-lg btn-light" style="width: 25rem; height: 3rem;">Join</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
     </div>
 
-    <section id="create">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <h2 style="font-size: 3em;">Create A Room</h2>
-
-                    <ol style="font-size:20px;">
-                        <li>Step 1</li>
-                        <li>Step 2</li>
-                        <li>Step 3</li>
-                        <li>Step 4</li>
-                    </ol>
-                    <div style="padding-left: 20px">
-                        <button type="submit" class="btn btn-light" data-toggle="modal"
-                            data-target="#createModal">Create</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="join">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <h2 style="font-size: 3em;">Join A Room</h2>
-                    <p>Enter The Room Code Below</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <div class="form-group w-50">
-                        <input type="code" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                            placeholder="Enter Code">
-                    </div>
-                    <button type="submit" onclick="new_link()" class="btn btn-light">Join</button>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </section>
 
     <section id="about">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
                     <h2 style="font-size: 3em;">About</h2>
-                    <p class="lead">The Communist Manifesto (originally Manifesto of the Communist Party) is an 1848 political pamphlet by the German philosophers Karl Marx and Friedrich Engels. Commissioned by the Communist League and originally published in London (in German as Manifest der Kommunistischen Partei) just as the Revolutions of 1848 began to erupt, the Manifesto was later recognised as one of the world's most influential political documents. It presents an analytical approach to the class struggle (historical and then-present) and the conflicts of capitalism and the capitalist mode of production, rather than a prediction of communism's potential future forms.
+                    <p class="lead">
+                        Watch with 
                     </p>
                 </div>
             </div>
         </div>
     </section>
+
+
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -163,27 +119,36 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="form-group">
-                            <label for="roomname">Room Name</label> 
-                            <input type="roomname" class="form-control" id="roomname" placeholder="My Awesome Room">
+                        <div id="group1" class="d-inline-block" style="width: 100%">
+                            <div class="form-group">
+                                <label for="roomname">Room Name</label> 
+                                <input type="roomname" class="form-control" id="roomname" placeholder="Enter a Room Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="vidurl">Video URL</label>
+                                <input type="vidurl" class="form-control" id="vidurl" placeholder="Enter a YouTube url" required>
+                                <div class="text-danger d-none" id="modal-error">Please Enter a Valid YouTube url.</div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="vidurl">Video URL</label>
-                            <input type="vidurl" class="form-control" id="vidurl" placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-                        </div>
-                        <div class="form-group">
-                            <label for="code">Code</label>
-                            <input type="code" class="form-control" id="code" placeholder="Your Code">
-                        </div>
-                        <div class="form-group">
-                            <label for="link">Link</label>
-                            <input type="link" class="form-control" id="link" placeholder="Your Link">
+                        <div id="group2" class="d-none" style="width: 100%">
+                            <div class="text-success">
+                                You created a room succesfully!
+                            </div>
+                            <div class="form-group">
+                                <label for="link">Link</label>
+                                <input type="link" class="form-control" id="link" placeholder="Your Link" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="code">Shareable Code</label>
+                                <input type="code" class="form-control" id="code" placeholder="Your Code" readonly>
+                            </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                    <button type="button" onclick="create_room()" class="btn btn-primary">Create</button>
+                    <button type="button" onclick="create_room()" class="btn btn-primary" id="c_butt">Create</button>
+                    <button type="button" onclick="goto_room()" class="btn btn-success d-none" id="go_butt">Go!</button>
                 </div>
             </div>
         </div>
@@ -200,7 +165,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                   <h>ERROR</h>
+                   <h>Please enter a valid room code</h>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -215,21 +180,54 @@
     <script type="text/javascript" src="https://gdata.youtube.com/feeds/api/videos/videoid?v=2&alt=json-in-script&format=5&callback=getTitle"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
 
     <script>
         var socket = io.connect(document.location.origin, {query:{type:'home'}});  
         function create_room(){
             var room_name = document.getElementById("roomname").value;
-            socket.emit('create_room', room_name);
+            var vid = document.getElementById("vidurl").value;
+            
+            var reg = /http(?:s?):\/\/(?:www|m\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/
+            var is_valid = vid.match(reg);
+            if(!is_valid){
+                $("#vidurl").addClass("is-invalid");
+                $("#modal-error").addClass("d-inline-block");
+                $("#modal-error").removeClass("d-none");
+                console.log("invalid link");
+                return;
+            }
+            vid = is_valid[1];
+            
+            
+            msg = {
+                "room_name": room_name,
+                "vid": vid
+            }
+            socket.emit('create_room', JSON.stringify(msg));
+        }
+        function goto_room(){
+            let m = $('#link').val();
+            location.href = m;
         }
 
         socket.on('create_room', function(msg) {
             var msg_p = JSON.parse(msg);
             link = document.location.origin + msg_p["route"] + "/" + msg_p["token"];
             console.log(link);
+            
+            //return the value to the user somehow
+            $("#group2").addClass("d-inline-block");
+            $("#group2").removeClass("d-none");
+            $("#group1").addClass("d-none");
+            $("#group1").removeClass("d-inline-block");
+            $("#c_butt").addClass("d-none");
+            $("#c_butt").removeClass("d-inline-block");
+            $("#go_butt").addClass("d-inline-block");
+            $("#go_butt").removeClass("d-none");
+
             document.getElementById('code').value = msg_p["token"];
             document.getElementById('link').value = link;
-
         });
         function new_link() {
             var room = document.getElementById("exampleInputEmail1").value;
@@ -246,6 +244,20 @@
                 }
             });
         }
+        (function($) {
+  "use strict"; // Start of use strict
+  // Closes responsive menu when a scroll trigger link is clicked
+  $('.js-scroll-trigger').click(function() {
+    $('.navbar-collapse').collapse('hide');
+  });
+
+  // Activate scrollspy to add active class to navbar items on scroll
+  $('body').scrollspy({
+    target: '#mainNav',
+    offset: 56
+  });
+
+})(jQuery); // End of use strict
     </script>
 </body>
 

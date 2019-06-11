@@ -1,389 +1,492 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c545.png">
 
-    <title>Watch With Me</title>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c545.png">
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- Custom styles for this template -->
-    <link href="/css/main.css" rel="stylesheet">
+  <title>Watch With Me</title>
 
-  </head>
-  <body>
-    <header>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="#">
-                <img src="http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c545.png" width="30" height="30"
-                    class="d-inline-block align-top" alt="">
-                Watch With Me
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item ">
-                        <a class="nav-link" href="#create">Create</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#join">Join</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-                </ul>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- Custom styles for this template -->
+  <link href="/css/main.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="/">
+        <img src="http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c545.png" width="30" height="30"
+          class="d-inline-block align-top" alt="">
+        Watch With Me
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item ">
+            <a class="nav-link" href="/#create">Create</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/#join">Join</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/#about">About</a>
+          </li>
+        </ul>
+      </div>
+      <button type="button" id="sidebarCollapse" class="btn btn-info" onclick="toggle_side()">
+        <i class="fas fa-align-left"></i>
+        <span>Toggle Chat</span>
+      </button>
+
+    </nav>
+  </header>
+
+
+
+  <!--Main Content-->
+  <div id="page">
+    <div id="videocontainer">
+      <div class="container" id="main-content">
+        <div class="" style="position: relative">
+          <div id="video-title" class="d-flex">
+            <div class="mr-auto">
+              <p class="font-weight-bold font-italic" id="room_title">Twice: Fancy</p>
             </div>
-            <button type="button" id="sidebarCollapse" class="btn btn-info" onclick="toggle_side()">
-                <i class="fas fa-align-left"></i>
-                <span>Toggle Chat</span>
-            </button>
-
-        </nav>
-    </header>
-
-
-
-    <!--Main Content-->
-    <div id="page">
-      <div id="videocontainer" >
-        <div class="container" id="main-content">
-          <div class="" style="position: relative">
-            <div style="top: 0; left: 0;position: absolute; z-index: 10; height: 100%; width: 100%; background-color: black; opacity: 0"></div>
-            <div id="video-title">
-              <p class="font-weight-bold font-italic">Twice: Fancy</p>
+            <div class="">
+              <button class="btn btn-info" data-toggle="modal" data-target="#vidModal" id="add-button">Change
+                Video</button>
+            </div>
+          </div>
+          <div>
+            <div
+              style="top: 0; left: 0;position: absolute; z-index: 10; height: calc(100% - 56px); width: 100%; background-color: black; opacity: 0; top: 56px;">
             </div>
             <div id="player"></div>
           </div>
-          <div class="d-flex">
-            <div class="">
-              <button type="button" onclick="emitPlay()" class="btn btn-dark p-2"><image class="p-2" style="width: 45px; height: 45px;" src="../images/triangle-right.svg"></image></button>
-              <button type="button" onclick="emitPause()" class="btn btn-dark p-2"><image class="p-2" style="width: 45px; height: 45px;" src="../images/primitive-square.svg"></image></button>
-            </div>
-            <div class="flex-grow-1 align-self-center">
-              <div id="progressBar" class="p-2">
-                <div id="pbarClick" class="progress" style="height: 4em">
-                  <div id="pbarClick2" class="progress-bar  bg-danger" role="progressbar" style="width: 0%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-              </div>
-            </div>
-            <div class="p-2 align-self-center">
-              <span class ="align-bottom font-weight" id="timestamp">0:00/0:00</span>
-            </div>
-          </div>
         </div>
-      </div>
-      <div id="sidechat">
-        <div id="chat">
-          <div id="chathead" class="pl-3 pt-3 pb-2" >
-            <div class="d-flex">
-              <div class="align-self-center mr-auto">
-                <text >Chat Room</text>
-              </div>
-              <div class="align-self-center ml-auto">
-                <button class="" data-toggle="modal" data-target="#exampleModal" style="width: 40px; height: 40px;border-radius: 50%; background-color: rgba(0,0,0,0); border: rgba(0,0,0,0)">
-                  <image class="" style="width: 100%; height: 100%;" src="../images/gear.svg"></image>
-                </button>
+        <div class="d-flex">
+          <div class="">
+            <button type="button" onclick="emitPlay()" class="btn btn-dark p-2">
+              <image class="p-2" style="width: 45px; height: 45px;" src="../images/triangle-right.svg"></image>
+            </button>
+            <button type="button" onclick="emitPause()" class="btn btn-dark p-2">
+              <image class="p-2" style="width: 45px; height: 45px;" src="../images/primitive-square.svg"></image>
+            </button>
+          </div>
+          <div class="flex-grow-1 align-self-center">
+            <div id="progressBar" class="p-2">
+              <div id="pbarClick" class="progress" style="height: 4em">
+                <div id="pbarClick2" class="progress-bar  bg-danger" role="progressbar" style="width: 0%"
+                  aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </div>
           </div>
-          <ul id="messages">
-          </ul>
-          <form id="chat_form" action="">
-            <div class="d-flex" style="margin-right: 0px; margin-left: 0px;">
-              <div class="px-2 py-2 flex-grow-1">
-               <input type="text" class="form-control" id="m" autocomplete="off" />
-              </div>
-              <div class="px-1 py-2">
-               <button class="btn btn-light">Send</button>
-              </div>
-            </div>
-          </form>
+          <div class="p-2 align-self-center">
+            <span class="align-bottom font-weight" id="timestamp">0:00/0:00</span>
+          </div>
         </div>
       </div>
     </div>
-    <!--Change Name Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Chat Settings</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+    <div id="sidechat">
+      <div id="chat">
+        <div id="chathead" class="pl-3 pt-3 pb-2">
+          <div class="d-flex">
+            <div class="align-self-center mr-auto">
+              <text>Chat Room</text>
+            </div>
+            <div class="align-self-center ml-auto">
+              <button class="" data-toggle="modal" data-target="#exampleModal"
+                style="width: 40px; height: 40px;border-radius: 50%; background-color: rgba(0,0,0,0); border: rgba(0,0,0,0)">
+                <image class="" style="width: 100%; height: 100%;" src="../images/gear.svg"></image>
               </button>
-            </div>
-            <div class="modal-body">
-              <text>
-                Set Username:
-              </text>
-              <input class="form-control" type="text" id="nameinput" placeholder="anonymous">
-              </input>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" onclick="set_name()" data-dismiss="modal">Save changes</button>
             </div>
           </div>
         </div>
+        <ul id="messages">
+        </ul>
+        <form id="chat_form" action="">
+          <div class="d-flex" style="margin-right: 0px; margin-left: 0px;">
+            <div class="px-2 py-2 flex-grow-1">
+              <input type="text" class="form-control" id="m" autocomplete="off" />
+            </div>
+            <div class="px-1 py-2">
+              <button class="btn btn-light">Send</button>
+            </div>
+          </div>
+        </form>
       </div>
+    </div>
+  </div>
+  <!--Change Name Modal-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content bg-dark" style="color: white">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Chat Settings</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <text>
+            Set Username:
+          </text>
+          <input class="form-control" type="text" id="nameinput" placeholder="anonymous">
+          </input>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="set_name()" data-dismiss="modal">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <i id="img-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="Tooltip for image" data-animation="false" data-trigger="manual"/>
+  <!--Set Video Modal-->
+  <div class="modal fade" id="vidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content bg-dark" style="color:white">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Change Video</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="vidurl">Video URL</label>
+            <input type="vidurl" class="form-control" id="vidurl" placeholder="Enter a YouTube url" required>
+            <div class="text-danger d-none" id="modal-error">Please Enter a Valid YouTube url.</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="button" onclick="set_vid()" class="btn btn-primary" id="c_butt" data-dismiss="modal">Save Change</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <i id="img-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="Tooltip for image"
+    data-animation="false" data-trigger="manual" />
 
 
-    <!-- Bootstrap core JavaScript
+  <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://gdata.youtube.com/feeds/api/videos/videoid?v=2&alt=json-in-script&format=5&callback=getTitle"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript"
+    src="https://gdata.youtube.com/feeds/api/videos/videoid?v=2&alt=json-in-script&format=5&callback=getTitle"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
 
-    <script>
-      function seekVid(e){
-        var x = e.pageX - this.offsetLeft, // or e.offsetX (less support, though)
+  <script>
+    function seekVid(e) {
+      var x = e.pageX - this.offsetLeft, // or e.offsetX (less support, though)
         y = e.pageY - this.offsetTop,  // or e.offsetY
         positionInfo = this.getBoundingClientRect();
-        console.log(x / positionInfo.width);
-        document.getElementById("pbarClick2").style.width = 100* (x/positionInfo.width) + "%"
-        //seekVideo(x / positionInfo.width * player.getDuration());
-        emitSeek(x / positionInfo.width * player.getDuration()); // calls seekVideo
-      }
-      pbar = document.getElementById('pbarClick');
-      pbar.addEventListener('click', seekVid);
-      //pbar.addEventListener('mouseover', seekVid);
+      console.log(x / positionInfo.width);
+      document.getElementById("pbarClick2").style.width = 100 * (x / positionInfo.width) + "%"
+      //seekVideo(x / positionInfo.width * player.getDuration());
+      emitSeek(x / positionInfo.width * player.getDuration()); // calls seekVideo
+    }
+    pbar = document.getElementById('pbarClick');
+    pbar.addEventListener('click', seekVid);
+    //pbar.addEventListener('mouseover', seekVid);
 
-      String.prototype.toMMSS = function () {
-        var sec_num = parseInt(this, 10); // don't forget the second param
-        var minutes = Math.floor(sec_num / 60);
-        var seconds = sec_num - (minutes * 60);
+    String.prototype.toMMSS = function () {
+      var sec_num = parseInt(this, 10); // don't forget the second param
+      var minutes = Math.floor(sec_num / 60);
+      var seconds = sec_num - (minutes * 60);
 
-        if (minutes < 10) { minutes = "0" + minutes; }
-        if (seconds < 10) { seconds = "0" + seconds; }
-        return minutes + ':' + seconds;
-      }
-      $("#pbarClick").on('mousemove', function (e) {
-        $("#img-tooltip").css({ top: $("#pbarClick").offset().top, left: e.pageX });
-        var p = ((e.pageX - this.offsetLeft) / this.getBoundingClientRect().width * player.getDuration()).toString().toMMSS();
-        console.log(p);
-        $('[data-toggle="tooltip"]').tooltip('hide').attr('data-original-title', p).tooltip('show');
-        $('[data-toggle="tooltip"]').tooltip('show');
-      })
+      if (minutes < 10) { minutes = "0" + minutes; }
+      if (seconds < 10) { seconds = "0" + seconds; }
+      return minutes + ':' + seconds;
+    }
+    $("#pbarClick").on('mousemove', function (e) {
+      $("#img-tooltip").css({ top: $("#pbarClick").offset().top, left: e.pageX });
+      var p = ((e.pageX - this.offsetLeft) / this.getBoundingClientRect().width * player.getDuration()).toString().toMMSS();
+      console.log(p);
+      $('[data-toggle="tooltip"]').tooltip('hide').attr('data-original-title', p).tooltip('show');
+      $('[data-toggle="tooltip"]').tooltip('show');
+    })
 
-      //toggle side bar function
-      var m_width = 1300;
-      var hidden_manually = false;
-      var is_hidden = false;
-      var too_small = window.innerWidth < m_width;
+    //toggle side bar function
+    var m_width = 1300;
+    var hidden_manually = false;
+    var is_hidden = false;
+    var too_small = window.innerWidth < m_width;
 
-      function toggle_side(){
-        if(!too_small){
-          if(is_hidden == false){
-            $('#sidechat').css("display", 'none');
-            $('#videocontainer').css("width", "100%");
-            is_hidden = true;
-            hidden_manually = true;
-          } else{ //things are hidden
-            $('#sidechat').css("display", 'inline-block');
-            $('#videocontainer').css("width", "80%");
-            is_hidden = false;
-            hidden_manually = false;
-          }
+    function toggle_side() {
+      if (!too_small) {
+        if (is_hidden == false) {
+          $('#sidechat').css("display", 'none');
+          $('#videocontainer').css("width", "100%");
+          is_hidden = true;
+          hidden_manually = true;
+        } else { //things are hidden
+          $('#sidechat').css("display", 'inline-block');
+          $('#videocontainer').css("width", "80%");
+          is_hidden = false;
+          hidden_manually = false;
         }
       }
+    }
 
 
 
-      //resize chat
-      var padding = 180;
-      $('#messages').css('height', window.innerHeight - padding);
+    //resize chat
+    var padding = 180;
+    $('#messages').css('height', window.innerHeight - padding);
+    hide_elements();
+    $(window).resize(function () {
       hide_elements();
-      $(window).resize(function () {
-        hide_elements();
+    });
+    function hide_elements() {
+      $('#messages').css('height', window.innerHeight - padding);
+      if (window.innerWidth < m_width) {
+        too_small = true;
+        $('#sidebarCollapse').css("display", 'none');
+        if (!is_hidden) {
+          $('#sidechat').css("display", 'none');
+          $('#videocontainer').css("width", "100%");
+          is_hidden = true;
+        }
+      } else {
+        too_small = false;
+        $('#sidebarCollapse').css("display", 'inline-block');
+        is_hidden = !hidden_manually;
+        toggle_side();
+      }
+
+    }
+
+    $("#pbarClick").on('mouseleave', function (e) {
+      $('[data-toggle="tooltip"]').tooltip('hide');
+    })
+
+    setInterval(function () {
+      var pBar = document.getElementById('pbarClick2');
+      if (player == null || progressBar == null) {
+        return;
+      }
+      var fraction = player.getCurrentTime() / player.getDuration() * 100;
+      pBar.style.width = fraction + "%";
+      var label = document.getElementById('timestamp');
+      var time = player.getCurrentTime().toString().toMMSS() + " / " + player.getDuration().toString().toMMSS();
+      label.innerHTML = time
+
+    }, 200);
+
+
+    // 2. This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+    var vid_id = 'kOHB85vDuow';
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        height: '480',
+        width: '100%',
+        videoId: vid_id,
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        },
+        playerVars: {
+          'controls': 0,
+          'disablekb': 1,
+          'modestbranding': 1,
+          'rel': 0,
+          'showinfo': 0,
+          'autoplay': 0
+        }
       });
-      function hide_elements(){
-        $('#messages').css('height', window.innerHeight - padding); 
-        if(window.innerWidth < m_width){
-          too_small = true;
-          $('#sidebarCollapse').css("display", 'none');
-          if(!is_hidden){
-            $('#sidechat').css("display", 'none');
-            $('#videocontainer').css("width", "100%");
-            is_hidden = true;
-          }
-        }else {
-          too_small = false;
-          $('#sidebarCollapse').css("display", 'inline-block');
-          is_hidden = !hidden_manually;
-          toggle_side();
-        }
+    }
 
-      }
-
-      $("#pbarClick").on('mouseleave', function (e) {
-        $('[data-toggle="tooltip"]').tooltip('hide');
-      })
-      
-      setInterval(function () {
-        var pBar = document.getElementById('pbarClick2');
-        if (player == null || progressBar == null) {
-          return;
-        }
-        var fraction = player.getCurrentTime() / player.getDuration() * 100;
-        pBar.style.width = fraction + "%";
-        var label = document.getElementById('timestamp');
-        var time = player.getCurrentTime().toString().toMMSS() + " / " + player.getDuration().toString().toMMSS();
-        label.innerHTML = time
-
-      }, 200);
-
-
-      // 2. This code loads the IFrame Player API code asynchronously.
-      var tag = document.createElement('script');
-
-      tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-      // 3. This function creates an <iframe> (and YouTube player)
-      //    after the API code downloads.
-      var player;
-      function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-          height: '480',
-          width: '100%',
-          videoId: 'kOHB85vDuow',
-          events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-          },
-          playerVars: {
-            'controls': 0,
-            'disablekb': 1,
-            'modestbranding': 1,
-            'rel': 0,
-            'showinfo': 0
-          }
-        });
-      }
-
-      // 4. The API will call this function when the video player is ready.
-      function onPlayerReady(event) {
+    var is_playing = false;
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+      event.target.seekTo(init_time);
+      event.target.pauseVideo();
+      if (is_playing === true) {
         event.target.playVideo();
       }
+    }
 
-      // 5. The API calls this function when the player's state changes.
-      //    The function indicates that when playing a video (state=1),
-      //    the player should play for six seconds and then stop.
-      var done = false;
-      function onPlayerStateChange(event) {
-      }
-      function playVideo(){
-        player.playVideo();
-        console.log('playing');
-      }
-      function pauseVideo(){
-        player.pauseVideo();
-        console.log('pausing');
-      }
-      function stopVideo() {
-        player.stopVideo();
-        console.log('stopping');
-      }
-      function seekVideo(param){
-        player.seekTo(param);
-      }
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event) {
+    }
+    function playVideo() {
+      player.playVideo();
+      console.log('playing');
+    }
+    function pauseVideo() {
+      player.pauseVideo();
+      console.log('pausing');
+    }
+    function stopVideo() {
+      player.stopVideo();
+      console.log('stopping');
+    }
+    function seekVideo(param) {
+      player.seekTo(param);
+    }
+    function setVideoByID(param) {
+      player.loadVideoById(param);
+      player.pauseVideo();
+    }
 
 
-      var name = "anonymous";
-      var l_token = "<%= token %>";
-      var socket = io.connect(document.location.origin, {query:{token: l_token, type:'watch'}}); 
-      console.log("token type");
-      console.log(typeof l_token);
-      // sending
-      function emitPlay(){
-        playVideo();
-        socket.emit('play')
-        socket.emit('activity log', name + ' started the video.');
-      }
-      function emitPause(){
-        pauseVideo();
-        socket.emit('pause')
-        socket.emit('activity log', name + ' paused the video.');
-        //Set the 
-      }
-      function emitSeek(param){
-        seekVideo(param);
-        socket.emit('activity log', name + ' seeked the video to ' + param.toString().toMMSS());
-        socket.emit('seek', param)
-      }
+    var name = "anonymous";
+    var l_token = "<%= token %>";
+    var socket = io.connect(document.location.origin, { query: { token: l_token, type: 'watch' } });
+    console.log("token type");
+    console.log(typeof l_token);
+    // sending
+    function emitPlay() {
+      playVideo();
+      socket.emit('play')
+      socket.emit('activity log', name + ' started the video.');
+    }
+    function emitPause() {
+      pauseVideo();
+      socket.emit('pause')
+      socket.emit('activity log', name + ' paused the video.');
+      //Set the 
+    }
+    function emitSeek(param) {
+      seekVideo(param);
+      socket.emit('activity log', name + ' seeked the video to ' + param.toString().toMMSS());
+      socket.emit('seek', param)
+    }
+    function emitSetVideo(param) {
+      setVideoByID(param);
+      socket.emit('activity log', name + ' set the video to ID ' + param);
+      socket.emit('set', param)
+    }
 
-      // receiving
-      socket.on('play', function() {
-        playVideo();
-      });
-      socket.on('pause', function() {
-        pauseVideo();
-      });
-      socket.on('seek', function(param) {
-        seekVideo(param);
-      });
-      
-      //SEND CHAT MESSAGE FUNCTION
-      $('form').submit(function(e){
-        e.preventDefault(); // prevents page reloading
-        if($('#m').val() === "")
-          return false;
-        msg_p = {
-          "name": name,
-          "message": $('#m').val(),
-        }
-        socket.emit('chat message', JSON.stringify(msg_p));
-        $('#m').val('');
+    function set_vid(){
+      let reg = /http(?:s?):\/\/(?:www|m\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/
+      let str = $('#vidurl').val();
+      let is_good = str.match(reg);
+      if(!is_good){
+        $("#vidurl").addClass("is-invalid");
+        $("#modal-error").addClass("d-inline-block");
+        $("#modal-error").removeClass("d-none");
+        console.log("invalid link");
+        return;
+      }else{
+        $("#vidurl").removeClass("is-invalid");
+        $("#modal-error").removeClass("d-inline-block");
+        $("#modal-error").addClass("d-none");
+      }
+      emitSetVideo(is_good[1]);
+    }
+
+    // receiving
+    socket.on('play', function () {
+      playVideo();
+    });
+    socket.on('pause', function () {
+      pauseVideo();
+    });
+    socket.on('seek', function (param) {
+      seekVideo(param);
+    });
+    socket.on('set', function (param) {
+      setVideoByID(param);
+      player.pauseVideo();
+    });
+
+    //SEND CHAT MESSAGE FUNCTION
+    $('form').submit(function (e) {
+      e.preventDefault(); // prevents page reloading
+      if ($('#m').val() === "")
         return false;
-      });
-
-      //Upon receiving a "chat message", we will do the following
-      socket.on('chat message', function(msg){
-        console.log(msg);
-        var msg_p = JSON.parse(msg);
-        console.log(msg_p);
-        $('#messages').append($('<li><span style="color: '+msg_p["color"]+'">'+msg_p["name"]+'</span>: '+msg_p["message"]+'</li>'));
-        $('#messages').scrollTop($('#messages')[0].scrollHeight - $('#messages')[0].clientHeight);
-      });
-
-      socket.on('activity log', function(msg){
-        console.log(msg);
-        var msg_p = JSON.parse(msg);
-        console.log(msg_p);
-
-        $('#messages').append($('<li><span style="color:' + msg_p["color"] + '">' + msg_p["message"] + '</span></li>'));
-        $('#messages').scrollTop($('#messages')[0].scrollHeight - $('#messages')[0].clientHeight);
-      });
-
-      //set name of user
-      function set_name(){
-        prev_name = name;
-        name = $('#nameinput').val();
-        if(name === ""){
-          name = "anonymous";
-        }
-        socket.emit('activity log', prev_name + ' changed their name to ' + name);
+      msg_p = {
+        "name": name,
+        "message": $('#m').val(),
       }
+      socket.emit('chat message', JSON.stringify(msg_p));
+      $('#m').val('');
+      return false;
+    });
 
-      $(window).scroll(function () {
-        $('#sidechat').css('top', $(window).scrollTop() + 56);
-      });
-    </script>
-  </body>
+    //Upon receiving a "chat message", we will do the following
+    socket.on('chat message', function (msg) {
+      console.log(msg);
+      var msg_p = JSON.parse(msg);
+      console.log(msg_p);
+      $('#messages').append($('<li><span style="color: ' + msg_p["color"] + '">' + msg_p["name"] + '</span>: ' + msg_p["message"] + '</li>'));
+      $('#messages').scrollTop($('#messages')[0].scrollHeight - $('#messages')[0].clientHeight);
+    });
+
+    socket.on('init', function (msg) {
+      console.log(msg);
+      var msg_p = JSON.parse(msg);
+      $('#room_title').text(msg_p["room_nickname"]);
+      vid_id = msg_p["video"];
+      init_time = msg_p["curr_time"];
+      is_playing = msg_p["is_playing"];
+      console.log(msg_p);
+    });
+
+    socket.on('activity log', function (msg) {
+      console.log(msg);
+      var msg_p = JSON.parse(msg);
+      console.log(msg_p);
+
+      $('#messages').append($('<li><span style="color:' + msg_p["color"] + '">' + msg_p["message"] + '</span></li>'));
+      $('#messages').scrollTop($('#messages')[0].scrollHeight - $('#messages')[0].clientHeight);
+    });
+
+    //set name of user
+    function set_name() {
+      prev_name = name;
+      name = $('#nameinput').val();
+      if (name === "") {
+        name = "anonymous";
+      }
+      socket.emit('activity log', prev_name + ' changed their name to ' + name);
+    }
+
+    $(window).scroll(function () {
+      $('#sidechat').css('top', $(window).scrollTop() + 56);
+    });
+  </script>
+</body>
+
 </html>

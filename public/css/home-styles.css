@@ -16,6 +16,7 @@ body {
   padding-top: 3rem;
   padding-bottom: 3rem;
   background-color:#343a40 !important;
+  color: white;
 }
 
 /* Carousel base class */
@@ -44,23 +45,13 @@ body {
 
 
 button.close {
-  background: #d73e4d;
-  background: rgba(215, 62, 77, 0.75);
   border: 0 none !important;
   color: white;
-  display: inline-block;
-  float: right;
-  font-size: 34px;
-  height: 40px;
-  line-height: 1;
-  margin: 0px 1px;
-  opacity: 1;
   text-align: center;
   text-shadow: none;
+  opacity: 1;
   -webkit-transition: background 0.2s ease-in-out;
   transition: background 0.2s ease-in-out;
-  vertical-align: top;
-  width: 46px;
 }
 
 section {
