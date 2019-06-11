@@ -399,7 +399,7 @@
     }
 
     function set_vid(){
-      let reg = /http(?:s?):\/\/(?:www|m\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/
+      let reg = /http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/
       let str = $('#vidurl').val();
       let is_good = str.match(reg);
       if(!is_good){

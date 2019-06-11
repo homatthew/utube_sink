@@ -194,7 +194,7 @@
             var room_name = document.getElementById("roomname").value;
             var vid = document.getElementById("vidurl").value;
             
-            var reg = /http(?:s?):\/\/(?:www|m\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/
+            var reg = /http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/
             var is_valid = vid.match(reg);
             if(!is_valid){
                 $("#vidurl").addClass("is-invalid");
