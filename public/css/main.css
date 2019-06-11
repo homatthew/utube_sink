@@ -204,4 +204,7 @@ section {
     width: 100%;
     display:inline-block;
   }
+  #sidebarCollapse{
+    display: none;
+  }
 }
