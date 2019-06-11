@@ -38,7 +38,11 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 app.get('/watch/:genLink', function (req, res) {
   console.log("GENLINK: " + req.params["genLink"]);
-  res.render('index', {token: req.params["genLink"]});
+  if(req.params["genLink"] in room_info) {
+    res.render('index', {token: req.params["genLink"]});
+  } else {
+    res.status(404).send('Room Not found');
+  }
 });
 
 app.get('/', function (req, res) {
@@ -55,71 +59,75 @@ io.on('connection', function(socket){
   if (socket.handshake.query.type == "watch") {
     console.log('a user connected');
     var room_name = socket.handshake.query.token;                               //Our room
-    var cur_room_color = room_info[room_name]["colors_left"].pop(0);          //Increments our room count
-    var socket_name = socket;
-    room_info[room_name]["user_list"].push(socket);                           //add socket to our user
-    socket.join(room_name);                                                   //Join that room
-    room_info[room_name]["room_count"] += 1;
-    console.log("Room Count: " + room_info[room_name]["room_count"]);          //Print out some values 
-    console.log("Room Color: " + cur_room_color);
-    console.log("param: " + socket.handshake.query.token)
-    console.log('user ' + socket.id + ' connected');
 
-    socket.on('pause', function(){
-      socket.in(room_name).emit('pause');
-    });
-    socket.on('play', function(){
-      socket.in(room_name).emit('play');
-    });
-    socket.on('seek', function(param){
-      socket.in(room_name).emit('seek', param);
-    });
+    if(room_name in room_info) {
 
-    socket.on('activity log', function(msg){
-      var msgObject = {
-        "message": msg, 
-        "color": cur_room_color
-      }
-      io.in(room_name).emit('activity log', JSON.stringify(msgObject));
-    });
+      var cur_room_color = room_info[room_name]["colors_left"].pop(0);          //Increments our room count
+      var socket_name = socket;
+      room_info[room_name]["user_list"].push(socket);                           //add socket to our user
+      socket.join(room_name);                                                   //Join that room
+      room_info[room_name]["room_count"] += 1;
+      console.log("Room Count: " + room_info[room_name]["room_count"]);          //Print out some values 
+      console.log("Room Color: " + cur_room_color);
+      console.log("param: " + socket.handshake.query.token)
+      console.log('user ' + socket.id + ' connected');
 
-    socket.on('chat message', function(msg){
-      //Our message is a json object. We will parse it on client side. 
-      msg = JSON.parse(msg);
-      var msgObject = {
-        "name": msg["name"],
-        "message": msg["message"], 
-        "color": cur_room_color
-      }
-      console.log("COLOR: " + msgObject["color"]);
+      socket.on('pause', function(){
+        socket.in(room_name).emit('pause');
+      });
+      socket.on('play', function(){
+        socket.in(room_name).emit('play');
+      });
+      socket.on('seek', function(param){
+        socket.in(room_name).emit('seek', param);
+      });
 
-      //converting our object to string
-      var msg_s = JSON.stringify(msgObject);
+      socket.on('activity log', function(msg){
+        var msgObject = {
+          "message": msg, 
+          "color": cur_room_color
+        }
+        io.in(room_name).emit('activity log', JSON.stringify(msgObject));
+      });
 
-      //Sends a message to all clients inside our room
-      io.in(room_name).emit('chat message', msg_s);
-      //Print out socket id, msg
-      console.log('message from socket ' + socket.id + ': ' + msg_s);
-      console.log('Room: ' + room_name);
-      console.log("ROOOOOMS: " + socket.rooms);
-    });
+      socket.on('chat message', function(msg){
+        //Our message is a json object. We will parse it on client side. 
+        msg = JSON.parse(msg);
+        var msgObject = {
+          "name": msg["name"],
+          "message": msg["message"], 
+          "color": cur_room_color
+        }
+        console.log("COLOR: " + msgObject["color"]);
 
-    //Client has disconnected from our server
-    socket.on('disconnect', function(){
-      console.log('user disconnected');
-      //We will decrement the number of users in our room
-      room_info[room_name]["colors_left"].push(cur_room_color);
-      room_info[room_name]["room_count"] -= 1;
+        //converting our object to string
+        var msg_s = JSON.stringify(msgObject);
 
-      var index = room_info[room_name]["user_list"].indexOf(socket_name);
-      if (index > -1) {
-        room_info[room_name]["user_list"].splice(index, 1);
-      }
-      for(var i = 0; i < room_info[room_name]["user_list"].length; i++) {
-        console.log("array after removal: " + room_info[room_name]["user_list"][i].id);
-      }
+        //Sends a message to all clients inside our room
+        io.in(room_name).emit('chat message', msg_s);
+        //Print out socket id, msg
+        console.log('message from socket ' + socket.id + ': ' + msg_s);
+        console.log('Room: ' + room_name);
+        console.log("ROOOOOMS: " + socket.rooms);
+      });
 
-    });
+      //Client has disconnected from our server
+      socket.on('disconnect', function(){
+        console.log('user disconnected');
+        //We will decrement the number of users in our room
+        room_info[room_name]["colors_left"].push(cur_room_color);
+        room_info[room_name]["room_count"] -= 1;
+
+        var index = room_info[room_name]["user_list"].indexOf(socket_name);
+        if (index > -1) {
+          room_info[room_name]["user_list"].splice(index, 1);
+        }
+        for(var i = 0; i < room_info[room_name]["user_list"].length; i++) {
+          console.log("array after removal: " + room_info[room_name]["user_list"][i].id);
+        }
+
+      });
+    }
   } else if (socket.handshake.query.type == "home") {
 
     socket.on("create_room", function(param) {
@@ -152,6 +160,22 @@ io.on('connection', function(socket){
       };
        var msg_s = JSON.stringify(linkObject);
         socket.emit('create_room', msg_s)
+    });
+
+
+    var is_valid = false;
+    socket.on("is_valid", function(room) {
+      for(var key in room_info) {
+        if (key == room) {
+          socket.emit("is_valid", "valid");
+          is_valid = true;
+          break;
+        }
+      }
+
+      if (!is_valid) {
+        socket.emit("is_valid", "invalid");
+      }
     });
 
     socket.on('disconnect', function(){
