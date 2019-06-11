@@ -1,12 +1,14 @@
 html {
   scroll-behavior: smooth;
 }
-svg{
-    display: inline-block;
-    width: 100%;
-    height: 300px;
+
+svg {
+  display: inline-block;
+  width: 100%;
+  height: 300px;
 }
-.carousel-inner img{
+
+.carousel-inner img {
   height: 45vh;
   width: 100%;
   object-fit: cover;
@@ -15,18 +17,20 @@ svg{
 body {
   padding-top: 3rem;
   padding-bottom: 3rem;
-  background-color:#343a40 !important;
+  background-color: #343a40 !important;
 }
-#video-title{
+
+#video-title {
   color: white;
   font-size: 1.5em;
 }
-#timestamp{
+
+#timestamp {
   color: white;
   font-size: 1em;
 }
 
-#main-content{
+#main-content {
   background-color: #1d2024;
   box-shadow: 0px 5px 12px 5px rgba(0, 0, 0, 0.411);
   padding-top: 3em;
@@ -34,21 +38,26 @@ body {
 }
 
 /* Carousel base class */
+
 .carousel {
   margin-bottom: 4rem;
 }
+
 /* Since positioning the image, we need to help out the caption */
+
 .carousel-caption {
   bottom: 3rem;
   z-index: 10;
 }
 
 /* Declare heights because of positioning of img element */
+
 .carousel-item {
   height: 20rem;
   background-color: #777;
 }
-.carousel-item > img {
+
+.carousel-item>img {
   position: absolute;
   top: 0;
   left: 0;
@@ -57,39 +66,22 @@ body {
 }
 
 
-button.close {
-  background: #d73e4d;
-  background: rgba(215, 62, 77, 0.75);
-  border: 0 none !important;
-  color: white;
-  display: inline-block;
-  float: right;
-  font-size: 34px;
-  height: 40px;
-  line-height: 1;
-  margin: 0px 1px;
-  opacity: 1;
-  text-align: center;
-  text-shadow: none;
-  -webkit-transition: background 0.2s ease-in-out;
-  transition: background 0.2s ease-in-out;
-  vertical-align: top;
-  width: 46px;
-}
-
 section {
   padding: 100px 0;
   color: white;
 }
 
 /* Center align the text within the three columns below the carousel */
+
 .marketing .col-lg-4 {
   margin-bottom: 1.5rem;
   text-align: center;
 }
+
 .marketing h2 {
   font-weight: 400;
 }
+
 .marketing .col-lg-4 p {
   margin-right: .75rem;
   margin-left: .75rem;
@@ -102,29 +94,24 @@ section {
     font-size: 1.25rem;
     line-height: 1.4;
   }
-
   .featurette-heading {
     font-size: 50px;
   }
 }
-@media(min-width: 768px){
+
+@media(min-width: 768px) {
   .navbar-form .form-control {
-      display: inline-block;
-      width: 10px;    
-      vertical-align: middle;
+    display: inline-block;
+    width: 10px;
+    vertical-align: middle;
   }
 }
-
-
 
 @media (min-width: 62em) {
   .featurette-heading {
     margin-top: 7rem;
   }
 }
-
-
-
 
 
 .bar {
@@ -134,49 +121,87 @@ section {
 .bar:hover {
   fill: rgb(75, 197, 235);
 }
-.navbar {
-  -webkit-box-shadow: 0px 2px 2px 0px rgba(33,37,41,1);
-  -moz-box-shadow: 0px 2px 2px 0px rgba(33,37,41,1);
-  box-shadow: 0px 2px 2px 0px rgba(33,37,41,1);
 
+.navbar {
+  -webkit-box-shadow: 0px 2px 2px 0px rgba(33, 37, 41, 1);
+  -moz-box-shadow: 0px 2px 2px 0px rgba(33, 37, 41, 1);
+  box-shadow: 0px 2px 2px 0px rgba(33, 37, 41, 1);
   /* the rest of your styling */
 }
 
 #img-tooltip {
   position: absolute;
 }
-#img-tooltip + .tooltip {
+
+#img-tooltip+.tooltip {
   pointer-events: none;
 }
-.tooltip{
+
+.tooltip {
   font-size: 1.2rem;
 }
 
-.wrapper {
-  display: flex;
+
+#chat {
+  font: 1.3em Helvetica, Arial;
+  color: white;
+  display: block;
   width: 100%;
 }
 
-#sidebar.active {
-  margin-left: -250px;
+#chathead{
+  background: rgba(0, 0, 0, 0.24);
 }
 
-#sidebar {
-  width: 250px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  z-index: 999;
-  background: #7386D5;
-  color: #fff;
-  transition: all 0.3s;
+#chat_form {
+  display: block;
+  padding: 2px;
+  width: 100%;
 }
 
-#chat { font: 13px Helvetica, Arial; display: block; width: 100%;}
-#chat_form { display:block;background: #000; padding: 3px;width: 100%; }
-#chat_form input { border: 0; padding: 10px; width: 80%; margin-right: .5%; }
-#chat_form button { width: 19%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-#messages {display:block;overflow:auto; height: 700px;list-style-type: none; margin: 0; padding: 0; }
-#messages li { padding: 5px 10px; word-wrap: break-word;}
-#messages li:nth-child(odd) {  }
+#sidechat {
+  position: absolute;
+  width: 20%;
+  background-color: #1d2024;
+  display: inline-block;
+  height: calc(100% - 60px);
+  top: 56px;
+  box-shadow: 0px 5px 12px 5px rgba(0, 0, 0, 0.411);
+}
+
+#chat_form input {
+  width: 100%;
+}
+
+#chat_form button {
+}
+#videocontainer{
+  width: 80%;
+  display:inline-block;
+}
+
+#messages {
+  display: block;
+  overflow: auto;
+  height: calc(100% - 180px);
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#messages li {
+  padding: 5px 10px;
+  word-wrap: break-word;
+}
+
+#messages li:nth-child(odd) {}
+
+@media all and (max-width: 1500px){
+  #sidechat{
+    display: none;
+  }
+  #videocontainer{
+    width: 100%;
+    display:inline-block;
+  }
+}

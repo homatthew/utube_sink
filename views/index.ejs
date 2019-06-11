@@ -11,17 +11,6 @@
     <link rel="icon" href="http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c545.png">
 
     <title>Watch With Me</title>
-    <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      #chat { font: 13px Helvetica, Arial; display: block; width: 100%;}
-      #chat_form { display:block;background: #000; padding: 3px;width: 100%; }
-      #chat_form input { border: 0; padding: 10px; width: 80%; margin-right: .5%; }
-      #chat_form button { width: 19%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages {display:block;overflow:auto; height: 700px;list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; word-wrap: break-word;}
-      #messages li:nth-child(odd) {  }
-
-    </style>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -54,21 +43,19 @@
                     </li>
                 </ul>
             </div>
-            <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <button type="button" id="sidebarCollapse" class="btn btn-info" onclick="toggle_side()">
                 <i class="fas fa-align-left"></i>
-                <span>Toggle Sidebar</span>
+                <span>Toggle Chat</span>
             </button>
 
         </nav>
     </header>
 
-    <!--TODO: Sidebar Chat-->
-    <div class="wrapper">
-    </div>
+
 
     <!--Main Content-->
     <div>
-      <div style="width: 80%;display:inline-block;">
+      <div id="videocontainer" >
         <div class="container" id="main-content">
           <div class="" style="position: relative">
             <div style="top: 0; left: 0;position: absolute; z-index: 10; height: 100%; width: 100%; background-color: black; opacity: 0"></div>
@@ -95,16 +82,59 @@
           </div>
         </div>
       </div>
-      <div style="position: absolute;width:19%;background-color:white;display:inline-block;height:700px;top:60px">
+      <div id="sidechat">
         <div id="chat">
+          <div id="chathead" class="pl-3 pt-3 pb-2" >
+            <div class="d-flex">
+              <div class="align-self-center mr-auto">
+                <text >Chat Room</text>
+              </div>
+              <div class="align-self-center ml-auto">
+                <button class="" data-toggle="modal" data-target="#exampleModal" style="width: 40px; height: 40px;border-radius: 50%; background-color: rgba(0,0,0,0); border: rgba(0,0,0,0)">
+                  <image class="" style="width: 100%; height: 100%;" src="../images/gear.svg"></image>
+                </button>
+              </div>
+            </div>
+          </div>
           <ul id="messages">
           </ul>
           <form id="chat_form" action="">
-            <input id="m" autocomplete="off" /><button>Send</button>
+            <div class="d-flex" style="margin-right: 0px; margin-left: 0px;">
+              <div class="px-2 py-2 flex-grow-1">
+               <input type="text" class="form-control" id="m" autocomplete="off" />
+              </div>
+              <div class="px-1 py-2">
+               <button class="btn btn-light">Send</button>
+              </div>
+            </div>
           </form>
         </div>
       </div>
     </div>
+    <!--Change Name Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Chat Settings</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <text>
+                Set Username:
+              </text>
+              <input class="form-control" type="text" id="nameinput" placeholder="anonymous">
+              </input>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onclick="set_name()" data-dismiss="modal">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <i id="img-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="Tooltip for image" data-animation="false" data-trigger="manual"/>
 
@@ -118,7 +148,6 @@
     <script type="text/javascript" src="https://gdata.youtube.com/feeds/api/videos/videoid?v=2&alt=json-in-script&format=5&callback=getTitle"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 
     <script>
       function seekVid(e){
@@ -150,6 +179,50 @@
         $('[data-toggle="tooltip"]').tooltip('hide').attr('data-original-title', p).tooltip('show');
         $('[data-toggle="tooltip"]').tooltip('show');
       })
+
+      //toggle side bar function
+      var hidden_manually = false;
+      var is_hidden = false;
+      var too_small = window.innerWidth < 1500;
+
+      function toggle_side(){
+        if(!too_small){
+          if(is_hidden == false){
+            $('#sidechat').css("display", 'none');
+            $('#videocontainer').css("width", "100%");
+            is_hidden = true;
+            hidden_manually = true;
+          } else{ //things are hidden
+            $('#sidechat').css("display", 'inline-block');
+            $('#videocontainer').css("width", "80%");
+            is_hidden = false;
+            hidden_manually = false;
+          }
+        }
+      }
+
+
+
+      //resize chat
+      var padding = 180;
+      $('#messages').css('height', window.innerHeight - padding);
+      $(window).resize(function () {
+        $('#messages').css('height', window.innerHeight - padding); 
+        if(window.innerWidth < 1500){
+          too_small = true;
+          $('#sidebarCollapse').css("display", 'none');
+          if(!is_hidden){
+            $('#sidechat').css("display", 'none');
+            $('#videocontainer').css("width", "100%");
+            is_hidden = true;
+          }
+        }else {
+          too_small = false;
+          $('#sidebarCollapse').css("display", 'inline-block');
+          is_hidden = !hidden_manually;
+          toggle_side();
+        }
+      });
 
       $("#pbarClick").on('mouseleave', function (e) {
         $('[data-toggle="tooltip"]').tooltip('hide');
@@ -225,21 +298,9 @@
         player.seekTo(param);
       }
 
-      $(document).ready(function () {
-
-          $("#sidebar").mCustomScrollbar({
-            theme: "minimal"
-          });
-
-          $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-          });
-
-        });
-
 
       var name = "anonymous";
-      var socket = io.connect('http://localhost:5000/', {query:"token=<%= token %>"});  
+      var socket = io.connect(document.location.origin, {query:"token=<%= token %>"});  
       // sending
       function emitPlay(){
         playVideo();
@@ -248,6 +309,7 @@
       function emitPause(){
         pauseVideo();
         socket.emit('pause')
+        //Set the 
       }
       function emitSeek(param){
         seekVideo(param);
@@ -264,23 +326,48 @@
       socket.on('seek', function(param) {
         seekVideo(param);
       });
-
+      
+      //SEND CHAT MESSAGE FUNCTION
       $('form').submit(function(e){
         e.preventDefault(); // prevents page reloading
-        socket.emit('chat message', $('#m').val());
+        if($('#m').val() === "")
+          return false;
+        msg_p = {
+          "name": name,
+          "message": $('#m').val(),
+        }
+        socket.emit('chat message', JSON.stringify(msg_p));
         $('#m').val('');
         return false;
       });
+
       //Upon receiving a "chat message", we will do the following
       socket.on('chat message', function(msg){
         console.log(msg);
         var msg_p = JSON.parse(msg);
         console.log(msg_p);
-        $('#messages').append($('<li><span style="color: '+msg_p["color"]+'">'+name+'</span>: '+msg_p["message"]+'</li>'));
+        $('#messages').append($('<li><span style="color: '+msg_p["color"]+'">'+msg_p["name"]+'</span>: '+msg_p["message"]+'</li>'));
         $('#messages').scrollTop($('#messages')[0].scrollHeight - $('#messages')[0].clientHeight);
       });
 
+      socket.on('activity log', function(msg){
+        console.log(msg);
+        var msg_p = JSON.parse(msg);
+        console.log(msg_p);
 
+        $('#messages').append($('<li><span style="color: #a30000">'+ msg_p["message"] + '</span></li>'));
+        $('#messages').scrollTop($('#messages')[0].scrollHeight - $('#messages')[0].clientHeight);
+      });
+
+      //set name of user
+      function set_name(){
+        prev_name = name;
+        name = $('#nameinput').val();
+        if(name === ""){
+          name = "anonymous";
+        }
+        socket.emit('activity log', prev_name + ' changed their name to ' + name);
+      }
 
     </script>
   </body>

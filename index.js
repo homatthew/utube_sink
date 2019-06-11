@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 5000
 
 
 var room_info = {"room1": 0, "room2": 0};
-var colors = ["#0000FF", "#FF0000", "#8A2BE2", "#FF69B4", "#1E90FF", "#008000", "#00FF7F", "#B22222", "#DAA520", "#FF4500", "#2E8B57", "#5F9EA0", "#D2691E"];
+var colors = ["#00FF00", "#00FFFF", "#FF00FF", "#FF0000", "#1E90FF", "#008000", "#00FF7F", "#B22222", "#DAA520", "#FF4500", "#2E8B57", "#5F9EA0", "#D2691E"];
 
 //Hard Coding Room1's object
 room_info["room1"] = {
@@ -65,10 +65,21 @@ io.on('connection', function(socket){
     socket.broadcast.emit('seek', param);
   });
 
-  socket.on('chat message', function(msg){
-    //Our message is a json object. We will parse it on client side. 
+  socket.on('activity log', function(msg){
     var msgObject = {
       "message": msg, 
+      "color": cur_room_color
+    }
+    io.in(Object.keys(socket.rooms)[1]).emit('activity log', JSON.stringify(msgObject));
+
+  });
+
+  socket.on('chat message', function(msg){
+    //Our message is a json object. We will parse it on client side. 
+    msg = JSON.parse(msg);
+    var msgObject = {
+      "name": msg["name"],
+      "message": msg["message"], 
       "color": cur_room_color
     }
     console.log("COLOR: " + msgObject["color"]);
