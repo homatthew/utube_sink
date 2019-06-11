@@ -54,7 +54,7 @@
 
 
     <!--Main Content-->
-    <div>
+    <div id="page">
       <div id="videocontainer" >
         <div class="container" id="main-content">
           <div class="" style="position: relative">
@@ -181,9 +181,10 @@
       })
 
       //toggle side bar function
+      var m_width = 1300;
       var hidden_manually = false;
       var is_hidden = false;
-      var too_small = window.innerWidth < 1500;
+      var too_small = window.innerWidth < m_width;
 
       function toggle_side(){
         if(!too_small){
@@ -206,9 +207,13 @@
       //resize chat
       var padding = 180;
       $('#messages').css('height', window.innerHeight - padding);
+      hide_elements();
       $(window).resize(function () {
+        hide_elements();
+      });
+      function hide_elements(){
         $('#messages').css('height', window.innerHeight - padding); 
-        if(window.innerWidth < 1500){
+        if(window.innerWidth < m_width){
           too_small = true;
           $('#sidebarCollapse').css("display", 'none');
           if(!is_hidden){
@@ -222,7 +227,8 @@
           is_hidden = !hidden_manually;
           toggle_side();
         }
-      });
+
+      }
 
       $("#pbarClick").on('mouseleave', function (e) {
         $('[data-toggle="tooltip"]').tooltip('hide');
@@ -369,6 +375,9 @@
         socket.emit('activity log', prev_name + ' changed their name to ' + name);
       }
 
+      $(window).scroll(function () {
+        $('#sidechat').css('top', $(window).scrollTop() + 56);
+      });
     </script>
   </body>
 </html>

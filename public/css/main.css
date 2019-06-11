@@ -166,7 +166,6 @@ section {
   display: inline-block;
   height: calc(100% - 60px);
   top: 56px;
-  box-shadow: 0px 5px 12px 5px rgba(0, 0, 0, 0.411);
 }
 
 #chat_form input {
@@ -196,10 +195,10 @@ section {
 
 #messages li:nth-child(odd) {}
 
-@media all and (max-width: 1500px){
-  #sidechat{
-    display: none;
-  }
+@media all and (max-width: 1300px){
+    #sidechat{
+      display: none;
+    }
   #videocontainer{
     width: 100%;
     display:inline-block;
