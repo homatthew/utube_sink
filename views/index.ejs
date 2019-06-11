@@ -306,7 +306,10 @@
 
 
       var name = "anonymous";
-      var socket = io.connect(document.location.origin, {query:"token=<%= token %>"});  
+      var l_token = "<%= token %>";
+      var socket = io.connect(document.location.origin, {query:{token: l_token, type:'watch'}}); 
+      console.log("token type");
+      console.log(typeof l_token);
       // sending
       function emitPlay(){
         playVideo();
