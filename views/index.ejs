@@ -175,7 +175,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          <button type="button" onclick="set_vid()" class="btn btn-primary" id="c_butt" data-dismiss="modal">Save Change</button>
+          <button type="button" onclick="set_vid()" class="btn btn-primary" id="c_butt">Save Change</button>
         </div>
       </div>
     </div>
@@ -235,7 +235,7 @@
     })
 
     //toggle side bar function
-    var m_width = 1300;
+    var m_width = 900;
     var hidden_manually = false;
     var is_hidden = false;
     var too_small = window.innerWidth < m_width;
@@ -249,7 +249,7 @@
           hidden_manually = true;
         } else { //things are hidden
           $('#sidechat').css("display", 'inline-block');
-          $('#videocontainer').css("width", "80%");
+          $('#videocontainer').css("width", "73%");
           is_hidden = false;
           hidden_manually = false;
         }
@@ -412,6 +412,7 @@
         $("#vidurl").removeClass("is-invalid");
         $("#modal-error").removeClass("d-inline-block");
         $("#modal-error").addClass("d-none");
+        $('#vidModal').modal('hide');
       }
       emitSetVideo(is_good[1]);
     }
