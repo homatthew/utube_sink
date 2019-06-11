@@ -311,14 +311,17 @@
       function emitPlay(){
         playVideo();
         socket.emit('play')
+        socket.emit('activity log', name + ' started the video.');
       }
       function emitPause(){
         pauseVideo();
         socket.emit('pause')
+        socket.emit('activity log', name + ' paused the video.');
         //Set the 
       }
       function emitSeek(param){
         seekVideo(param);
+        socket.emit('activity log', name + ' seeked the video to ' + param.toString().toMMSS());
         socket.emit('seek', param)
       }
 
@@ -361,7 +364,7 @@
         var msg_p = JSON.parse(msg);
         console.log(msg_p);
 
-        $('#messages').append($('<li><span style="color: #a30000">'+ msg_p["message"] + '</span></li>'));
+        $('#messages').append($('<li><span style="color:' + msg_p["color"] + '">' + msg_p["message"] + '</span></li>'));
         $('#messages').scrollTop($('#messages')[0].scrollHeight - $('#messages')[0].clientHeight);
       });
 
