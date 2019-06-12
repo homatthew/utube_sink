@@ -210,7 +210,7 @@ section {
 
 #messages li:nth-child(odd) {}
 
-@media all and (max-width: 1300px){
+@media all and (max-width: 900px){
     #sidechat{
       display: none;
     }
